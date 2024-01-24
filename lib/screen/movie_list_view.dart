@@ -80,6 +80,18 @@ class _MovieListViewState extends State<MovieListView> {
     });
   }
 
+  Future topRatedList() async {
+    moviesCount = 0;
+    movies = [];
+    helper = HttpHelper();
+    List moviesFromAPI = [];
+    moviesFromAPI = await helper.getTopRatedAsList();
+    setState(() {
+      movies = moviesFromAPI;
+      moviesCount = movies.length;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     NetworkImage image; //tambahan image
@@ -123,6 +135,17 @@ class _MovieListViewState extends State<MovieListView> {
                 });
               },
             ),
+            ListTile(
+              title: const Text('Top Rated'),
+              onTap: () {
+                Navigator.pop(context);
+                setState(() {
+                  this.searchIcon = Icon(Icons.search);
+                  this.titleBar = Text('Daftar Film Rating Tertinggi');
+                });
+                topRatedList();
+              },
+            )
           ],
         ),
       ),
@@ -167,7 +190,7 @@ class _MovieListViewState extends State<MovieListView> {
               ),
               title: Text(movies[position].title),
               subtitle: Text(
-                '${'Released: ' + movies[position].releaseDate} - Vote: ${movies[position].voteAverage}',
+                '${'Release Date :  ' + movies[position].releaseDate}   Movie Rating :  ${movies[position].voteAverage}',
               ),
             ),
           );

@@ -37,6 +37,38 @@ class MovieDetail extends StatelessWidget {
                 child: Image.network(path),
               ),
               Text('${selectedMovie.overView}'),
+              // Untuk Rating dan nama pembuat
+              Padding(
+                padding:
+                    const EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: <Widget>[
+                    Expanded(
+                        child: Text(
+                      'Movie Rating : ${selectedMovie.voteAverage}',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    )),
+                    Expanded(
+                      child: Text(
+                        'Release Date : ${selectedMovie.releaseDate}',
+                        textAlign: TextAlign.right,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              //Container untuk nama dan NIM
+              Container(
+                padding: EdgeInsets.all(8),
+                child: Text(
+                  'Created By\nFahrul Fauji\nNIM : 21201195',
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              )
             ],
           ),
         ),
